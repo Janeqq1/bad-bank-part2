@@ -1,5 +1,5 @@
-[https://youtu.be/8riHsvTSvaM]
-[https://qinqin-wangbankingapplication.s3.us-east-2.amazonaws.com/index.html]
+Youtube video project walk-through: [https://youtu.be/8riHsvTSvaM]
+AWS deployment: [https://qinqin-wangbankingapplication.s3.us-east-2.amazonaws.com/index.html]
 
 # Getting Started with Create React App
 
