@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -35,4 +35,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav-link:active {
+  color: #fff !important;
+  background: red !important;
+}
+
+.nav-link:hover {
+  background: powderblue !important;
+}
+
+.navbar-brand:hover {
+  background: powderblue !important;
+}
+
+a:focus {
+  background: peachpuff !important;
+}
+
+#account {
+  color: rgb(10, 132, 213);
+  text-align: right;
+  margin-left: 10rem;
+  font-weight: bold;
 }

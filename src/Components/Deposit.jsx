@@ -2,21 +2,21 @@ import Card from "./Card";
 import {useContext, useState} from "react";
 import UserContext from "./Context";
 
-function Withdraw() {
+function Deposit() {
   const ctx = useContext(UserContext);
   const [show, setShow] = useState(true);
   const [status, setStatus] = useState('');
   const [amount, setAmount] = useState('');
   let userIdx = 0;
 
-  console.log("Withdraw Component" + JSON.stringify(ctx));
+  console.log("Depost Component" + JSON.stringify(ctx));
 
   if (!ctx.currentLogin) {
     return (
         <Card 
           bgcolor="warning"
           txtcolor="black"
-          header="Withdraw"
+          header="Deposit"
           title="Not Logged In"
           text="Please Log In First"
         />
@@ -30,7 +30,7 @@ function Withdraw() {
       if (ctx.currentLogin === ctx.users[i].name) {
         console.log("found user" + ctx.users[i]);
         return i;
-      }
+      }    
     }
 
     /* should never be here */
@@ -38,27 +38,20 @@ function Withdraw() {
     return 0;
   }
 
-  function validWithdraw() {
+  function validDeposit() {
      if (parseFloat(amount) <= 0) {
-      setStatus('Error: Can not withdraw negative amount.');
+      setStatus('Error: Can not deposit negative amount.');
       setTimeout(()=>setStatus(''), 3000);
       return false;
      }
-
-     if (parseFloat(amount) > ctx.users[userIdx].balance) {
-      setStatus('Error: Can not withdraw more than balance.');
-      setTimeout(()=>setStatus(''), 3000);
-      return false;
-     }
-
      return true;
   }
 
-  function handleWithdraw() {
+  function handleDeposit() {
       /* first valid input */
-      if (!validWithdraw()) return;
+      if (!validDeposit()) return;
       
-      ctx.users[userIdx].balance -= parseFloat(amount);
+      ctx.users[userIdx].balance += parseFloat(amount);
       setShow(false);
   }
 
@@ -71,29 +64,29 @@ function Withdraw() {
 
   return (
       <Card 
-        bgcolor="warning-subtle"
+        bgcolor="success-subtle"
         txtcolor="black"
-        header="Withdraw"
+        header="Deposit"
         status={status}
         body={show ? (<>
               Balance: {ctx.users[userIdx].balance}
               <br/><br/>
-              Withdraw Amount: <br/>
+              Deposit Amount: <br/>
               <input type="number" className="form-control"
-                id="withdraw" placeholder="Withdraw Amount" value={amount}
+                id="deposit" placeholder="Deposit Amount" value={amount}
                 onChange={e=>setAmount(e.currentTarget.value)} /><br/>
               <button type="submit" 
                 className={"btn btn-light btn-outline-dark " + ((!amount) ? "disabled" : '')}
-                onClick={handleWithdraw}>Withdraw</button>
+                onClick={handleDeposit}>Deposit</button>
 
         </> ) 
         : 
         (<>
-          <h5>{`Successfully withdrew $${amount} from Account ${ctx.currentLogin} .`}</h5><br />
+          <h5>{`Successfully deposited $${amount} to Account ${ctx.currentLogin} .`}</h5><br />
           New Balance is: {ctx.users[userIdx].balance} <br/><br/>
 
           <button type="submit" className="btn btn-light btn-outline-dark"
-            onClick={clearForm}>Make another Withdraw</button>
+            onClick={clearForm}>Make another Deposit</button>
         </>)
         }
       />
@@ -101,5 +94,4 @@ function Withdraw() {
 
 }
 
-export default Withdraw;
-
+export default Deposit;
